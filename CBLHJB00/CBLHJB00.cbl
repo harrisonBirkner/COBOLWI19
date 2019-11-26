@@ -1,5 +1,8 @@
        IDENTIFICATION DIVISION.
+      *THIS PROGRAM READS A FILE AND CALCULATES A TOTAL NUMBER OF 
+      *STUDENTS AND CREATES A REPORT.
        PROGRAM-ID. CBLHJB00.
+	   AUTHOR. HARRISON BIRKNER.
 
        ENVIRONMENT DIVISION.
 		   SELECT STUDENT-MASTER
@@ -38,7 +41,7 @@
 	   01  MISC.
 		   05  MORE-RECS               PIC X(3)    VALUE 'YES'.
 		   05  PAGE-CTR                PIC 99      VALUE 0.
-		   05  C-STUD-CTR              PIC 999.
+		   05  C-STUD-CTR              PIC 999    VALUE 0.
 		   05  CURRENT-DATE-AND-TIME.
 			   10 CURRENT-YEAR         PIC X(4).
 			   10 CURRENT-MONTH        PIC XX.
@@ -77,6 +80,7 @@
 		   05  FILLER                  PIC X(16)   VALUE SPACES.
 		   05  FILLER                  PIC X(15)
 		       VALUE 'STARTING SALARY'.
+
 	   01  DETAIL-LINE.
 		   05  D-ID                    PIC X(7).
 		   05  FILLER                  PIC X(20)     VALUE SPACES.
@@ -101,6 +105,7 @@
 		   PERFORM L2-INIT.
 		   PERFORM L2-MAINLINE
 			   UNTIL MORE-RECS = "NO".
+		   PERFORM L2-CLOSING.
            STOP RUN.
 
 	   L2-INIT.
@@ -134,7 +139,7 @@
 	   L3-MOVE-PRINT.
 		   MOVE I-ID                   TO D-ID.
 		   MOVE I-FNAME                TO D-FIRST-NAME.
-		   MOVE I-NAME                 TO D-LAST-NAME.
+		   MOVE I-LNAME                 TO D-LAST-NAME.
 		   MOVE I-GPA                  TO D-GPA.
 		   MOVE I-EX-STRT-SAL          TO D-START-SALARY.
 		   WRITE PRTLINE FROM DETAIL-LINE
