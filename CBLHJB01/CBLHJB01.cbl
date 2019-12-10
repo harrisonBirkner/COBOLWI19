@@ -50,15 +50,15 @@
 			   10 CURRENT-DAY          PIC XX.
 			   10 CURRENT-TIME         PIC X(11).
 		   05 CALCS.
-			   10 C-INC-DEC-AMT        PIC 9(7).
-			   10 C-INC-DEC-PCT        PIC 9(7).
+			   10 C-INC-DEC-AMT        PIC S9(7).
+			   10 C-INC-DEC-PCT        PIC S9(7).
 			   10 C-TOTAL-SALES        PIC 9(13).
 			   10 C-NUM-SALES          PIC 9(4)    VALUE 0.
 		   05 GRAND-TOTALS.
 			   10 C-GT-TOTAL-SALES     PIC 9(15)   VALUE 0.
-			   10 C-GT-INC-DEC-AMT     PIC 9(9)    VALUE 0.
-			   10 C-GT-AVG-INC-DEC-AMT PIC 9(7)    VALUE 0.
-			   10 C-GT-AVG-INC-DEC-PCT PIC 9(5)    VALUE 0.
+			   10 C-GT-INC-DEC-AMT     PIC S9(9)    VALUE 0.
+			   10 C-GT-AVG-INC-DEC-AMT PIC S9(7)    VALUE 0.
+			   10 C-GT-AVG-INC-DEC-PCT PIC S9(5)    VALUE 0.
 			   10 C-GT-PREV-QTY        PIC 9(7)    VALUE 0.
 
 
@@ -140,7 +140,7 @@
 
 	   01 TOTAL-LINE1.
 		   05 FILLER                 PIC X(45)     VALUE SPACES.
-		   05 FILLER                 PIC X(15)
+		   05 FILLER                 PIC X(13)
               VALUE 'GRAND TOTALS:'.
 		   05 FILLER                 PIC XX        VALUE SPACES.
 		   05 GT-INC-DEC-AMT         PIC Z,ZZZ,ZZ9B-.
@@ -149,7 +149,7 @@
 
 	   01 TOTAL-LINE2.
 		   05 FILLER                 PIC X(25)       VALUE SPACES.
-		   05 FILLER                 PIC X(38)
+		   05 FILLER                 PIC X(33)
 		      VALUE 'AVERAGE INCREASE/DECREASE AMOUNT:'.
 		   05 FILLER                 PIC X(5)        VALUE SPACES.
 		   05 GT-AVG-INC-DEC-AMT     PIC ZZ,ZZ9B-.    
@@ -210,6 +210,10 @@
                C-INC-DEC-AMT / I-PIZZA-PREV-QTY * 100.
 		   COMPUTE C-TOTAL-SALES = I-PIZZA-PRICE * I-PIZZA-CUR-QTY.
            COMPUTE C-NUM-SALES = C-NUM-SALES + 1.
+		   COMPUTE C-GT-INC-DEC-AMT =
+               C-GT-INC-DEC-AMT + C-INC-DEC-AMT.
+		   COMPUTE C-GT-TOTAL-SALES = C-GT-TOTAL-SALES + C-TOTAL-SALES.
+		   COMPUTE C-GT-PREV-QTY = C-GT-PREV-QTY + I-PIZZA-PREV-QTY.
 
 	   L3-MOVE-PRINT.
 		   MOVE I-PIZZA-ITEM-NO1       TO D-PIZZA-ITEM-NO1.
@@ -230,6 +234,10 @@
 		               PERFORM L4-HEADING.
 
 	   L3-TOTALS.
+		   COMPUTE C-GT-AVG-INC-DEC-AMT =
+               C-GT-INC-DEC-AMT / C-NUM-SALES.
+		   COMPUTE C-GT-AVG-INC-DEC-PCT = 
+			   C-GT-INC-DEC-AMT / C-GT-PREV-QTY * 100.
 		   MOVE C-GT-TOTAL-SALES       TO GT-TOTAL-SALES.
 		   MOVE C-GT-AVG-INC-DEC-AMT   TO GT-AVG-INC-DEC-AMT.
 		   MOVE C-GT-AVG-INC-DEC-PCT   TO GT-AVG-INC-DEC-PCT.
