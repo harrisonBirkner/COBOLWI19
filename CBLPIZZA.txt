@@ -1,0 +1,14 @@
+12342019120201000005000025 normal data increase/decrease amt: 25 increase/decrease pct: 100% total sales: $50.00
+69692020042010000010000500 normal data increase/decrease amt: 400 increase/decrease pct: total sales:
+LOVE2001100705000005000010 normal data increase/decrease amt: increase/decrease pct: total sales:
+00002000011000000000000000 all zeros increase/decrease amt: increase/decrease pct: total sales:
+24681999051500010010000100 normal data and min increase/decrease amt: increase/decrease pct: total sales:
+12342018041710000000100100 normal data and min increase/decrease amt: increase/decrease pct: total sales:
+D4Z92008122110000010000001 normal data and min increase/decrease amt: increase/decrease pct: total sales:
+369 2003030699999999900001 max data and min increase/decrease amt: increase/decrease pct: total sales:
+ABCD2015091899990000199999 max data and min increase/decrease amt: increase/decrease pct: total sales:
+EFGH1995010100019999999999 max data and min increase/decrease amt: increase/decrease pct: total sales:
+Z5112002022499999999999999 all max increase/decrease amt: increase/decrease pct: total sales:
+XW 32008092500009999999999 max and zero increase/decrease amt: increase/decrease pct: total sales:
+Y2K 2000010199990000099999 max and zero increase/decrease amt: increase/decrease pct: total sales:
+43212004040699999999900000 max and zero increase/decrease amt: increase/decrease pct: total sales:

@@ -21,13 +21,13 @@
 		   RECORD CONTAINS 49 CHARACTERS.
 
        01 I-REC.
-	      05 I-ID                      PIC X(7).
-		  05 I-NAME.
-		      10 I-LNAME               PIC X(15).
-			  10 I-FNAME               PIC X(15).
-			  10 I-INIT                PIC X.
-	      05 I-GPA                     PIC 9V99.
-		  05 I-EX-STRT-SAL             PIC 9(6)V99.
+	       05 I-ID                      PIC X(7).
+		   05 I-NAME.
+		       10 I-LNAME               PIC X(15).
+			   10 I-FNAME               PIC X(15).
+			   10 I-INIT                PIC X.
+	       05 I-GPA                     PIC 9V99.
+		   05 I-EX-STRT-SAL             PIC 9(6)V99.
 
 	   FD PRTOUT
 		   LABEL RECORD IS OMITTED
@@ -41,7 +41,7 @@
 	   01  MISC.
 		   05  MORE-RECS               PIC X(3)    VALUE 'YES'.
 		   05  PAGE-CTR                PIC 99      VALUE 0.
-		   05  C-STUD-CTR              PIC 999    VALUE 0.
+		   05  C-STUD-CTR              PIC 999     VALUE 0.
 		   05  CURRENT-DATE-AND-TIME.
 			   10 CURRENT-YEAR         PIC X(4).
 			   10 CURRENT-MONTH        PIC XX.
