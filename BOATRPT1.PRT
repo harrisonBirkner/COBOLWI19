@@ -1,5 +1,5 @@
 
-DATE: 12/18/2019                                       BIRKNER S MONTHLY SALES                                              PAGE:  1
+DATE: 12/19/2019                                       BIRKNER S MONTHLY SALES                                              PAGE:  1
 
 CUSTOMER                                    BOAT         PURCHASE           ACCESSORY                     PREP                 TOTAL
 LAST NAME              STATE                COST         DATE               PACKAGE                       COST                  COST
@@ -58,7 +58,7 @@ QUERVO                  IA            999,999.99         99/99/99           SKI 
 
 
 
-DATE: 12/18/2019                                       BIRKNER S MONTHLY SALES                                              PAGE:  2
+DATE: 12/19/2019                                       BIRKNER S MONTHLY SALES                                              PAGE:  2
 
 CUSTOMER                                    BOAT         PURCHASE           ACCESSORY                     PREP                 TOTAL
 LAST NAME              STATE                COST         DATE               PACKAGE                       COST                  COST
@@ -70,9 +70,9 @@ LESTER                  MO            999,999.99         99/99/99           FISH
 HERNANDEZ               WI                   .00         08/15/98           FISHING PACKAGE          99,999.99             99,999.99
 MUHAMED                 WI                   .01         09/11/01           ELECTRONICS                    .00                   .01
 FREEMAN                 WI                   .00         99/99/99           ELECTRONICS                    .01                   .01
-DURSLEY                 WI             80,000.00         06/14/98           SKI PACKAGE                  15.00             80,015.00
+DURSLEY                 WI             80,000.00         06/14/98           SKI PACKAGE               1,500.00             81,500.00
 
-                       SUBTOTALS FOR JOHN BOAT              NUMBER SOLD:     10                                         $3,380,015.0
+                       SUBTOTALS FOR JOHN BOAT              NUMBER SOLD:     10                                         $3,381,500.0
 
 BOAT TYPE: CABIN CRUISER                                                                                                            
                                                                                                                                     
@@ -105,4 +105,4 @@ VAN VELSOR              WI             70,000.00         12/16/19           FISH
                        SUBTOTALS FOR CANOE                  NUMBER SOLD:     10                                         $3,375,000.0
 
 
-                       GRAND TOTALS                         NUMBER SOLD:     59                                       $20,117,515.00
+                       GRAND TOTALS                         NUMBER SOLD:     59                                       $20,119,000.00
