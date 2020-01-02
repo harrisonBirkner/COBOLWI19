@@ -1,7 +1,10 @@
        IDENTIFICATION DIVISION.
        PROGRAM-ID. CBLHJB03.
 	   AUTHOR. HARRISON BIRKNER.
-
+      *THIS PROGRAM CREATES A SUB-TOTAL REPORT LISTING ALL PEOPLE WHO 
+      *PURCHASED BOATS FROM THE COMPANY. IT HAS TWO CONTROL BREAKS, THE
+      *MINOR BY STATE AND THE MAJOR BY BOAT TYPE.
+	   
        ENVIRONMENT DIVISION.
 		   SELECT BOAT-INPUT
 			   ASSIGN TO 'C:\COBOLWI19\CBLBOAT1.DAT'
@@ -155,9 +158,9 @@
            05 FILLER                      PIC X(14)
               VALUE 'SUBTOTALS FOR '.
            05 MJ-BOAT-TYPE                PIC X(13).
-           05 FILLER                      PIC X(10)     VALUE SPACES.
-           05 FILLER                      PIC X(14)
-              VALUE 'NUMBER SOLD:  '.
+           05 FILLER                      PIC X(9)      VALUE SPACES.
+           05 FILLER                      PIC X(15)
+              VALUE 'NUMBER SOLD:   '.
            05 MJ-NUM-SALES                PIC Z,ZZ9.
            05 FILLER                      PIC X(38)     VALUE SPACES.
            05 MJ-TOTAL-SALES              PIC $,$$$,$$$,$$$.99.
@@ -188,33 +191,37 @@
            MOVE CURRENT-MONTH             TO TITLE-MONTH.
            MOVE CURRENT-DAY               TO TITLE-DAY.
            MOVE CURRENT-YEAR              TO TITLE-YEAR.
-           PERFORM L3-READ-INPUT.
+           PERFORM L9-READ-INPUT.
            MOVE I-BOAT-TYPE TO H-BOAT-TYPE.
            MOVE I-STATE		TO H-STATE.
 		   MOVE I-STATE     TO MN-STATE.
-           PERFORM L5-EVAL-BOAT-TYPE.
+           PERFORM L9-EVAL-BOAT-TYPE.
            PERFORM L3-INIT-HEADING.
 
        L2-MAINLINE.
            IF I-STATE NOT = H-STATE
-	           PERFORM L3-MN-SUBTOTALS
+	           PERFORM L9-MN-SUBTOTALS
 	           IF I-BOAT-TYPE NOT = H-BOAT-TYPE
-		           PERFORM L3-MJ-SUBTOTALS
-		           PERFORM L5-EVAL-BOAT-TYPE
+		           PERFORM L9-MJ-SUBTOTALS
+		           PERFORM L9-EVAL-BOAT-TYPE
 		           WRITE PRTLINE FROM BOAT-LINE
 			           AFTER ADVANCING 2 LINES
 		                   WRITE PRTLINE FROM SPACES.
            PERFORM L3-CALCS.
            PERFORM L3-MOVE-PRINT.
-           PERFORM L3-READ-INPUT.
+           PERFORM L9-READ-INPUT.
 
        L2-CLOSING.
-           PERFORM L3-MJ-SUBTOTALS.
+		   PERFORM L9-MN-SUBTOTALS.
+           PERFORM L9-MJ-SUBTOTALS.
            PERFORM L3-TOTALS.
            CLOSE BOAT-INPUT.
            CLOSE PRTOUT.
 
        L3-INIT-HEADING.
+      *THIS PARAGRAPH FUNCTIONS THE SAME AS L4-HEADING, EXCEPT IT IS 
+      *ONLY RUN ONCE AT THE BEGINNING OF THE PROGRAM AND DOES NOT PRINT
+      *AN EXTRA 60 BLANK LINES.
            ADD 1 TO PAGE-CTR.
            MOVE PAGE-CTR                  TO TITLE-PAGE.
            WRITE PRTLINE FROM TITLE-LINE.
@@ -225,11 +232,6 @@
            WRITE PRTLINE FROM BOAT-LINE
 	           AFTER ADVANCING 2 LINES.
            WRITE PRTLINE FROM SPACES.
-
-       L3-READ-INPUT.
-           READ BOAT-INPUT
-	           AT END
-		           MOVE 'NO'              TO MORE-RECS.
 	
        L3-CALCS.
            EVALUATE I-ACC-PACK
@@ -262,63 +264,20 @@
            WRITE PRTLINE FROM DETAIL-LINE
 	           AFTER ADVANCING 1 LINE
 		           AT EOP
-			           PERFORM L4-HEADING.
+			           PERFORM L9-HEADING.
 
-       L3-MN-SUBTOTALS.
-           MOVE C-MN-NUM-SALES			  TO MN-NUM-SALES.
-		   MOVE C-MN-TOTAL-SALES          TO MN-TOTAL-SALES.
-           WRITE PRTLINE FROM MN-SUBTOTAL-LINE
-	           AFTER ADVANCING 2 LINES
-		           AT EOP
-			           PERFORM L4-HEADING.
-		   WRITE PRTLINE FROM SPACES
-		       AT EOP
-			       PERFORM L4-HEADING.
-			   
-           ADD C-MN-NUM-SALES             TO C-MJ-NUM-SALES.
-           ADD C-MN-TOTAL-SALES           TO C-MJ-TOTAL-SALES.
-   
-           MOVE 0					      TO C-MN-NUM-SALES.
-		   MOVE 0                         TO C-MN-TOTAL-SALES.
-   
-           MOVE I-STATE					  TO H-STATE.
-		   MOVE I-STATE                   TO MN-STATE.
-			   
-       L3-MJ-SUBTOTALS.
-           MOVE C-MJ-NUM-SALES            TO MJ-NUM-SALES.
-           MOVE C-MJ-TOTAL-SALES          TO MJ-TOTAL-SALES.
-           WRITE PRTLINE FROM MJ-SUBTOTAL-LINE
-	           AFTER ADVANCING 2 LINES
-		           AT EOP
-			           PERFORM L4-HEADING.
-           ADD C-MJ-NUM-SALES             TO C-GT-NUM-SALES.
-           ADD C-MJ-TOTAL-SALES           TO C-GT-TOTAL-SALES.
-
-           MOVE 0                         TO C-MJ-NUM-SALES.
-           MOVE 0                         TO C-MJ-TOTAL-SALES.
-
-           MOVE I-BOAT-TYPE               TO H-BOAT-TYPE.
-
-       L3-TOTALS.
+	   L3-TOTALS.
            MOVE C-GT-NUM-SALES            TO GT-NUM-SALES.
            MOVE C-GT-TOTAL-SALES          TO GT-TOTAL-SALES.
            WRITE PRTLINE FROM TOTAL-LINE
 	           AFTER ADVANCING 3 LINES.
 
-       L4-HEADING.
-           ADD 1 TO PAGE-CTR.
-	           MOVE PAGE-CTR              TO TITLE-PAGE.
-           WRITE PRTLINE FROM TITLE-LINE
-	           AFTER ADVANCING PAGE.
-            WRITE PRTLINE FROM COL-HEADING1
-	           AFTER ADVANCING 2 LINES.
-            WRITE PRTLINE FROM COL-HEADING2
-	           AFTER ADVANCING 1 LINE.
-            WRITE PRTLINE FROM BOAT-LINE
-	           AFTER ADVANCING 2 LINES.
-            WRITE PRTLINE FROM SPACES.
-
-       L5-EVAL-BOAT-TYPE.
+       L9-READ-INPUT.
+           READ BOAT-INPUT
+	           AT END
+		           MOVE 'NO'              TO MORE-RECS.
+   
+       L9-EVAL-BOAT-TYPE.
            EVALUATE I-BOAT-TYPE
 	           WHEN 'B'
 		           MOVE 'BASS BOAT'       TO COL-BOAT-TYPE
@@ -351,5 +310,53 @@
 				   MOVE 'CABIN CRUISER'   TO MN-BOAT-TYPE
 		           MOVE 1.30			  TO C-MARKUP-PERC
            END-EVALUATE.
+
+	   L9-MN-SUBTOTALS.
+           MOVE C-MN-NUM-SALES			  TO MN-NUM-SALES.
+		   MOVE C-MN-TOTAL-SALES          TO MN-TOTAL-SALES.
+           WRITE PRTLINE FROM MN-SUBTOTAL-LINE
+	           AFTER ADVANCING 2 LINES
+		           AT EOP
+			           PERFORM L9-HEADING.
+		   WRITE PRTLINE FROM SPACES
+		       AT EOP
+			       PERFORM L9-HEADING.
+			   
+           ADD C-MN-NUM-SALES             TO C-MJ-NUM-SALES.
+           ADD C-MN-TOTAL-SALES           TO C-MJ-TOTAL-SALES.
    
+           MOVE 0					      TO C-MN-NUM-SALES.
+		   MOVE 0                         TO C-MN-TOTAL-SALES.
+   
+           MOVE I-STATE					  TO H-STATE.
+		   MOVE I-STATE                   TO MN-STATE.
+
+	   L9-MJ-SUBTOTALS.
+           MOVE C-MJ-NUM-SALES            TO MJ-NUM-SALES.
+           MOVE C-MJ-TOTAL-SALES          TO MJ-TOTAL-SALES.
+           WRITE PRTLINE FROM MJ-SUBTOTAL-LINE
+	           AFTER ADVANCING 2 LINES
+		           AT EOP
+			           PERFORM L9-HEADING.
+           ADD C-MJ-NUM-SALES             TO C-GT-NUM-SALES.
+           ADD C-MJ-TOTAL-SALES           TO C-GT-TOTAL-SALES.
+
+           MOVE 0                         TO C-MJ-NUM-SALES.
+           MOVE 0                         TO C-MJ-TOTAL-SALES.
+
+           MOVE I-BOAT-TYPE               TO H-BOAT-TYPE.
+
+	   L9-HEADING.
+           ADD 1 TO PAGE-CTR.
+	           MOVE PAGE-CTR              TO TITLE-PAGE.
+           WRITE PRTLINE FROM TITLE-LINE
+	           AFTER ADVANCING PAGE.
+            WRITE PRTLINE FROM COL-HEADING1
+	           AFTER ADVANCING 2 LINES.
+            WRITE PRTLINE FROM COL-HEADING2
+	           AFTER ADVANCING 1 LINE.
+            WRITE PRTLINE FROM BOAT-LINE
+	           AFTER ADVANCING 2 LINES.
+            WRITE PRTLINE FROM SPACES.
+
        END PROGRAM CBLHJB03.
