@@ -1,5 +1,5 @@
 
-DATE: 01/02/2020                                       BIRKNER S MONTHLY SALES                                              PAGE:  1
+DATE: 01/08/2020                                       BIRKNER S MONTHLY SALES                                              PAGE:  1
 
 CUSTOMER                                    BOAT         PURCHASE           ACCESSORY                     PREP                 TOTAL
 LAST NAME              STATE                COST         DATE               PACKAGE                       COST                  COST
@@ -32,7 +32,6 @@ XXXXXXXXXXXXXXX         ZZ            999,999.99         99/99/99           ELEC
 
           SUBTOTALS FOR ZZ           BASS BOAT             NUMBER SOLD:       1                                        $1,521,540.20
                                                                                                                                     
-
                        SUBTOTALS FOR BASS BOAT             NUMBER SOLD:      11                                         $4,672,250.0
 
 BOAT TYPE: PONTOON                                                                                                                  
@@ -54,18 +53,18 @@ LESTER                  MO            999,999.99         99/99/99           FISH
                                                                                                                                     
 HERNANDEZ               WI                   .00         08/15/98           FISHING PACKAGE          99,999.99            106,366.17
 MUHAMED                 WI                   .01         09/11/01           ELECTRONICS                    .00              5,740.23
+FREEMAN                 WI                   .00         99/99/99           ELECTRONICS                    .01              5,740.23
 
 
 
 
-DATE: 01/02/2020                                       BIRKNER S MONTHLY SALES                                              PAGE:  2
+DATE: 01/08/2020                                       BIRKNER S MONTHLY SALES                                              PAGE:  2
 
 CUSTOMER                                    BOAT         PURCHASE           ACCESSORY                     PREP                 TOTAL
 LAST NAME              STATE                COST         DATE               PACKAGE                       COST                  COST
 
 BOAT TYPE: PONTOON                                                                                                                  
                                                                                                                                     
-FREEMAN                 WI                   .00         99/99/99           ELECTRONICS                    .01              5,740.23
 GEORGE                  WI             25,000.00         09/04/11           ELECTRONICS               5,000.00             44,165.22
 
           SUBTOTALS FOR WI           PONTOON               NUMBER SOLD:       4                                          $162,011.85
@@ -74,7 +73,6 @@ XXXXXXXXXXXXXXX         ZZ            999,999.99         99/99/99           ELEC
 
           SUBTOTALS FOR ZZ           PONTOON               NUMBER SOLD:       1                                        $1,436,740.20
                                                                                                                                     
-
                        SUBTOTALS FOR PONTOON               NUMBER SOLD:      11                                         $4,577,931.0
 
 BOAT TYPE: SKI BOAT                                                                                                                 
@@ -105,7 +103,6 @@ XXXXXXXXXXXXXXX         ZZ            999,999.99         99/99/99           ELEC
 
           SUBTOTALS FOR ZZ           SKI BOAT              NUMBER SOLD:       1                                        $1,622,240.20
                                                                                                                                     
-
                        SUBTOTALS FOR SKI BOAT              NUMBER SOLD:      11                                         $5,700,868.5
 
 BOAT TYPE: JOHN BOAT                                                                                                                
@@ -114,20 +111,20 @@ BOB - DYLAN             CA                   .00         12/11/19           SKI 
 DAVIS                   CA                   .01         09/09/15           ELECTRONICS                    .01              5,740.24
 
           SUBTOTALS FOR CA           JOHN BOAT             NUMBER SOLD:       2                                            $9,959.04
+                                                                                                                                    
+QUERVO                  IA            999,999.99         99/99/99           SKI PACKAGE                    .01          1,414,018.80
+BIRKNER                 IA                   .01         06/01/19           FISHING PACKAGE          99,999.99            106,366.18
 
 
 
 
-DATE: 01/02/2020                                       BIRKNER S MONTHLY SALES                                              PAGE:  3
+DATE: 01/08/2020                                       BIRKNER S MONTHLY SALES                                              PAGE:  3
 
 CUSTOMER                                    BOAT         PURCHASE           ACCESSORY                     PREP                 TOTAL
 LAST NAME              STATE                COST         DATE               PACKAGE                       COST                  COST
 
 BOAT TYPE: JOHN BOAT                                                                                                                
                                                                                                                                     
-                                                                                                                                    
-QUERVO                  IA            999,999.99         99/99/99           SKI PACKAGE                    .01          1,414,018.80
-BIRKNER                 IA                   .01         06/01/19           FISHING PACKAGE          99,999.99            106,366.18
 WILSON                  IA             10,000.00         10/31/18           ELECTRONICS                 500.00             20,368.22
 
           SUBTOTALS FOR IA           JOHN BOAT             NUMBER SOLD:       3                                        $1,540,753.20
@@ -147,7 +144,6 @@ XXXXXXXXXXXXXXX         ZZ            999,999.99         99/99/99           ELEC
 
           SUBTOTALS FOR ZZ           JOHN BOAT             NUMBER SOLD:       1                                        $1,521,540.20
                                                                                                                                     
-
                        SUBTOTALS FOR JOHN BOAT             NUMBER SOLD:      11                                         $4,718,858.0
 
 BOAT TYPE: CABIN CRUISER                                                                                                            
@@ -174,22 +170,21 @@ BILL                    WI            100,000.00         09/04/11           ELEC
 
           SUBTOTALS FOR WI           CABIN CRUISER         NUMBER SOLD:       4                                          $277,286.85
                                                                                                                                     
+XXXXXXXXXXXXXXX         ZZ            999,999.99         99/99/99           ELECTRONICS              99,999.99          1,489,740.20
+
+          SUBTOTALS FOR ZZ           CABIN CRUISER         NUMBER SOLD:       1                                        $1,489,740.20
+                                                                                                                                    
 
 
 
 
-DATE: 01/02/2020                                       BIRKNER S MONTHLY SALES                                              PAGE:  4
+DATE: 01/08/2020                                       BIRKNER S MONTHLY SALES                                              PAGE:  4
 
 CUSTOMER                                    BOAT         PURCHASE           ACCESSORY                     PREP                 TOTAL
 LAST NAME              STATE                COST         DATE               PACKAGE                       COST                  COST
 
 BOAT TYPE: CABIN CRUISER                                                                                                            
                                                                                                                                     
-XXXXXXXXXXXXXXX         ZZ            999,999.99         99/99/99           ELECTRONICS              99,999.99          1,489,740.20
-
-          SUBTOTALS FOR ZZ           CABIN CRUISER         NUMBER SOLD:       1                                        $1,489,740.20
-                                                                                                                                    
-
                        SUBTOTALS FOR CABIN CRUISER         NUMBER SOLD:      11                                         $4,728,043.4
 
 BOAT TYPE: CANOE                                                                                                                    
@@ -220,7 +215,6 @@ XXXXXXXXXXXXXXX         ZZ            999,999.99         99/99/99           ELEC
 
           SUBTOTALS FOR ZZ           CANOE                 NUMBER SOLD:       1                                        $1,383,740.20
                                                                                                                                     
-
                        SUBTOTALS FOR CANOE                 NUMBER SOLD:      11                                         $4,287,274.3
 
 

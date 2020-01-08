@@ -335,7 +335,7 @@
            MOVE C-MJ-NUM-SALES            TO MJ-NUM-SALES.
            MOVE C-MJ-TOTAL-SALES          TO MJ-TOTAL-SALES.
            WRITE PRTLINE FROM MJ-SUBTOTAL-LINE
-	           AFTER ADVANCING 2 LINES
+	           AFTER ADVANCING 1 LINE
 		           AT EOP
 			           PERFORM L9-HEADING.
            ADD C-MJ-NUM-SALES             TO C-GT-NUM-SALES.
