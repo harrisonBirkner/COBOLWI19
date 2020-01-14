@@ -1,5 +1,5 @@
 
-DATE: 01/02/2020                                       BIRKNER S MONTHLY SALES                                              PAGE:  1
+DATE: 01/13/2020                                       BIRKNER S MONTHLY SALES                                              PAGE:  1
 
 CUSTOMER                                    BOAT         PURCHASE           ACCESSORY                     PREP                 TOTAL
 LAST NAME              STATE                COST         DATE               PACKAGE                       COST                  COST
@@ -18,7 +18,7 @@ MUHAMED                 WI                   .01         09/11/01           ELEC
 FREEMAN                 WI                   .00         99/99/99           ELECTRONICS                    .01                   .01
 XXXXXXXXXXXXXXX         ZZ            999,999.99         99/99/99           ELECTRONICS              99,999.99          1,099,999.98
 
-                       SUBTOTALS FOR BASS BOAT              NUMBER SOLD:     11                                         $3,363,000.0
+                       SUBTOTALS FOR BASS BOAT              NUMBER SOLD:     11                                        $3,363,000.00
 
 BOAT TYPE: PONTOON                                                                                                                  
                                                                                                                                     
@@ -34,7 +34,7 @@ FREEMAN                 WI                   .00         99/99/99           ELEC
 GEORGE                  WI             25,000.00         09/04/11           ELECTRONICS               5,000.00             30,000.00
 XXXXXXXXXXXXXXX         ZZ            999,999.99         99/99/99           ELECTRONICS              99,999.99          1,099,999.98
 
-                       SUBTOTALS FOR PONTOON                NUMBER SOLD:     11                                         $3,485,000.0
+                       SUBTOTALS FOR PONTOON                NUMBER SOLD:     11                                        $3,485,000.00
 
 BOAT TYPE: SKI BOAT                                                                                                                 
                                                                                                                                     
@@ -50,7 +50,7 @@ FREEMAN                 WI                   .00         99/99/99           ELEC
 POTTER                  WI             25,000.00         09/04/11           ELECTRONICS               5,000.00             30,000.00
 XXXXXXXXXXXXXXX         ZZ            999,999.99         99/99/99           ELECTRONICS              99,999.99          1,099,999.98
 
-                       SUBTOTALS FOR SKI BOAT               NUMBER SOLD:     11                                         $3,840,000.0
+                       SUBTOTALS FOR SKI BOAT               NUMBER SOLD:     11                                        $3,840,000.00
 
 BOAT TYPE: JOHN BOAT                                                                                                                
                                                                                                                                     
@@ -58,7 +58,7 @@ BOB - DYLAN             CA                   .00         12/11/19           SKI 
 
 
 
-DATE: 01/02/2020                                       BIRKNER S MONTHLY SALES                                              PAGE:  2
+DATE: 01/13/2020                                       BIRKNER S MONTHLY SALES                                              PAGE:  2
 
 CUSTOMER                                    BOAT         PURCHASE           ACCESSORY                     PREP                 TOTAL
 LAST NAME              STATE                COST         DATE               PACKAGE                       COST                  COST
@@ -76,20 +76,20 @@ FREEMAN                 WI                   .00         99/99/99           ELEC
 DURSLEY                 WI             80,000.00         06/14/98           SKI PACKAGE               1,500.00             81,500.00
 XXXXXXXXXXXXXXX         ZZ            999,999.99         99/99/99           ELECTRONICS              99,999.99          1,099,999.98
 
-                       SUBTOTALS FOR JOHN BOAT              NUMBER SOLD:     11                                         $3,392,000.0
+                       SUBTOTALS FOR JOHN BOAT              NUMBER SOLD:     11                                        $3,392,000.00
 
 BOAT TYPE: CABIN CRUISER                                                                                                            
                                                                                                                                     
 BOB - DYLAN             CA                   .00         12/11/19           SKI PACKAGE                    .00                   .00
 DAVIS                   CA                   .01         09/09/15           ELECTRONICS                    .01                   .02
 
-                       SUBTOTALS FOR CABIN CRUISER          NUMBER SOLD:      2                                                  $.0
+                       SUBTOTALS FOR CABIN CRUISER          NUMBER SOLD:      2                                                 $.02
 
 BOAT TYPE: CABIN CRUISER                                                                                                            
                                                                                                                                     
 MACGYVER                CA             60,000.00         09/29/85           FISHING PACKAGE           1,000.00             61,000.00
 
-                       SUBTOTALS FOR CABIN CRUISER          NUMBER SOLD:      1                                            $61,000.0
+                       SUBTOTALS FOR CABIN CRUISER          NUMBER SOLD:      1                                           $61,000.00
 
 BOAT TYPE: CABIN CRUISER                                                                                                            
                                                                                                                                     
@@ -102,34 +102,35 @@ FREEMAN                 WI                   .00         99/99/99           ELEC
 BILL                    WI            100,000.00         09/04/11           ELECTRONICS              15,000.00            115,000.00
 XXXXXXXXXXXXXXX         ZZ            999,999.99         99/99/99           ELECTRONICS              99,999.99          1,099,999.98
 
-                       SUBTOTALS FOR CABIN CRUISER          NUMBER SOLD:      8                                         $3,414,999.9
+                       SUBTOTALS FOR CABIN CRUISER          NUMBER SOLD:      8                                        $3,414,999.98
 
 BOAT TYPE: CANOE                                                                                                                    
                                                                                                                                     
 BOB - DYLAN             CA                   .00         12/11/19           SKI PACKAGE                    .00                   .00
 DAVIS                   CA                   .01         09/09/15           ELECTRONICS                    .01                   .02
+SKYWALKER               CT                500.00         10/10/10           ELECTRONICS                 100.00                600.00
 QUERVO                  IA            999,999.99         99/99/99           SKI PACKAGE                    .01          1,000,000.00
 BIRKNER                 IA                   .01         06/01/19           FISHING PACKAGE          99,999.99            100,000.00
 HILL                    MO             20,000.00         05/15/15           FISHING PACKAGE             250.00             20,250.00
 LESTER                  MO            999,999.99         99/99/99           FISHING PACKAGE                .00            999,999.99
 HERNANDEZ               WI                   .00         08/15/98           FISHING PACKAGE          99,999.99             99,999.99
-MUHAMED                 WI                   .01         09/11/01           ELECTRONICS                    .00                   .01
 
 
 
 
-DATE: 01/02/2020                                       BIRKNER S MONTHLY SALES                                              PAGE:  3
+DATE: 01/13/2020                                       BIRKNER S MONTHLY SALES                                              PAGE:  3
 
 CUSTOMER                                    BOAT         PURCHASE           ACCESSORY                     PREP                 TOTAL
 LAST NAME              STATE                COST         DATE               PACKAGE                       COST                  COST
 
 BOAT TYPE: CANOE                                                                                                                    
                                                                                                                                     
+MUHAMED                 WI                   .01         09/11/01           ELECTRONICS                    .00                   .01
 FREEMAN                 WI                   .00         99/99/99           ELECTRONICS                    .01                   .01
 VAN VELSOR              WI             70,000.00         12/16/19           FISHING PACKAGE           5,000.00             75,000.00
 XXXXXXXXXXXXXXX         ZZ            999,999.99         99/99/99           ELECTRONICS              99,999.99          1,099,999.98
 
-                       SUBTOTALS FOR CANOE                  NUMBER SOLD:     11                                         $3,395,250.0
+                       SUBTOTALS FOR CANOE                  NUMBER SOLD:     12                                        $3,395,850.00
 
 
-                       GRAND TOTALS                         NUMBER SOLD:     66                                       $20,951,250.00
+                       GRAND TOTALS                         NUMBER SOLD:     67                                       $20,951,850.00

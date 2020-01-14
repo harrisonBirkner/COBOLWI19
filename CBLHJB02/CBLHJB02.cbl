@@ -52,7 +52,7 @@
 
 		   05 MJ-SUBTOTALS.
 			   10 C-MJ-NUM-SALES          PIC 9(6)      VALUE 0.
-			   10 C-MJ-TOTAL-SALES        PIC 9(11)V99  VALUE 0.
+			   10 C-MJ-TOTAL-SALES        PIC 9(12)V99  VALUE 0.
 		   05 GRAND-TOTALS.
 			   10 C-GT-NUM-SALES          PIC 9(7)      VALUE 0.
 			   10 C-GT-TOTAL-SALES        PIC 9(13)V99  VALUE 0.
@@ -138,7 +138,7 @@
            05 FILLER                      PIC X(14)
               VALUE 'NUMBER SOLD:  '.
            05 MJ-NUM-SALES                PIC Z,ZZ9.
-           05 FILLER                      PIC X(38)     VALUE SPACES.
+           05 FILLER                      PIC X(37)     VALUE SPACES.
            05 MJ-TOTAL-SALES              PIC $,$$$,$$$,$$$.99.
 
 	   01 TOTAL-LINE.

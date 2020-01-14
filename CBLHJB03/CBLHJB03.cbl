@@ -162,7 +162,7 @@
            05 FILLER                      PIC X(15)
               VALUE 'NUMBER SOLD:   '.
            05 MJ-NUM-SALES                PIC Z,ZZ9.
-           05 FILLER                      PIC X(38)     VALUE SPACES.
+           05 FILLER                      PIC X(37)     VALUE SPACES.
            05 MJ-TOTAL-SALES              PIC $,$$$,$$$,$$$.99.
 
 	   01 TOTAL-LINE.
