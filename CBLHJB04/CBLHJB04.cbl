@@ -21,7 +21,11 @@
 	   01 I-REC.
 	       05 I-BLD-CODE           PIC XX.
 		   05 I-UNIT			   PIC 99.
+               88 VAL-UNIT-PREM               VALUE 23, 25.
 		   05 I-TENANTS		       PIC 9.
+			   88 VAL-BASE-TENANTS            VALUE 1.
+			   88 VAL-2-3-TENANTS             VALUE 2 THRU 3.
+			   88 VAL-4-TENANTS               VALUE 4 THRU 9.
 		   05 I-ELECTRIC	       PIC 999V99.
 		   05 I-GAS			       PIC 999V99.
 		   05 I-WATER		       PIC 999V99.
@@ -46,6 +50,14 @@
 			   10 CURRENT-TIME     PIC X(11).
 		   05 CALCS.
 			   10 C-BASE-RENT      PIC 9(5)V99.
+			   10 C-TENANT-CHARGE  PIC 9(5)V99.
+			   10 C-PREM-DISC      PIC S9(6)V99.
+			   10 C-TOTAL-UTIL-COST PIC 9(6)V99.
+			   10 C-SUBTOTAL       PIC 9(6)V99.
+			   10 C-RENT-DUE       PIC 9(6)V99.
+		   05 TOTALS.
+			   10 C-GT-PREM-CTR    PIC 9(5)   VALUE 0.
+			   10 C-GT-DISC-CTR    PIC 9(5)   VALUE 0.
 
 	   01 TITLE-LINE1.
 		   05 FILLER               PIC X(6)   VALUE 'DATE: '.
@@ -136,6 +148,12 @@
 		   05 D-RENT-DUE           PIC $$,$$$.99.
 		   05 D-RENT-LIMIT-FLAG    PIC XXX    VALUE SPACES.
 
+	   01 TOTAL-LINE.
+
+	   01 TOTAL-LINE2.
+
+	   01 TOTAL-LINE3.
+
        PROCEDURE DIVISION.
 	   L1-MAIN.
            PERFORM L2-INIT.
@@ -205,29 +223,36 @@
            EVALUATE I-UNIT
                WHEN 1 THRU 8
                    COMPUTE C-BASE-RENT ROUNDED = 650
-                   IF I-TENANTS = 2 THRU 3
-                       MOVE 25 TO C-TENANT-CHARGE
+                   IF VAL-2-3-TENANTS
+                       COMPUTE C-TENANT-CHARGE ROUNDED = 25 * I-TENANTS
                    ELSE
-                       IF I-TENANTS >= 4
-                           MOVE 83.45 TO C-TENANT-CHARGE
+                       IF VAL-4-TENANTS
+                           MOVE 83.45        TO C-TENANT-CHARGE
+					   ELSE
+						   MOVE 0            TO C-TENANT-CHARGE
                        END-IF
                    END-IF
                WHEN 9 THRU 16
                    COMPUTE C-BASE-RENT ROUNDED = 700
-                   IF I-TENANTS = 2 THROUGH 3
-                       MOVE 35.55 TO C-TENANT-CHARGE
+                   IF VAL-2-3-TENANTS
+                       COMPUTE C-TENANT-CHARGE ROUNDED =
+                           35.55 * I-TENANTS
                    ELSE
-                       IF I-TENANTS >= 4
-                           MOVE 135 TO C-TENANT-CHARGE
+                       IF VAL-4-TENANTS
+                           MOVE 135          TO C-TENANT-CHARGE
+					   ELSE
+						   MOVE 0            TO C-TENANT-CHARGE
                        END-IF
                    END-IF
                WHEN 17 THRU 25
                    COMPUTE C-BASE-RENT ROUNDED = 825
-                   IF I-TENANTS = 2 THRU 3
-                       MOVE 50 TO C-TENANT-CHARGE
+                   IF VAL-2-3-TENANTS
+                       COMPUTE C-TENANT-CHARGE ROUNDED = 50 * I-TENANTS
                    ELSE
-                       IF I-TENANTS >= 4
-                          MOVE 185.60 TO C-TENANT-CHARGE
+                       IF VAL-4-TENANTS
+                          MOVE 185.60        TO C-TENANT-CHARGE
+					   ELSE
+						   MOVE 0            TO C-TENANT-CHARGE
                        END-IF
                    END-IF
            END-EVALUATE.
@@ -239,15 +264,14 @@
                    MOVE 'GEORIGA' TO D-BLD
                WHEN 'PP'
                    MOVE 'PARK PLACE' TO D-BLD
-                   IF I-UNIT = 23 OR I-UNIT = 25
+                   IF VAL-UNIT-PREM
                        COMPUTE C-PREM-DISC ROUNDED = C-BASE-RENT * 0.12
                        ADD 1 TO C-GT-PREM-CTR
                WHEN 'IA'
                    MOVE 'IOWA CONDO' TO D-BLD
                    IF CURRENT-MONTH = 7 OR CURRENT-MONTH = 12
-                       COMPUTE C-PREM-DISC ROUNDED =
-                       (C-BASE-RENT * 0.5) * -1
-                   ADD 1 TO C-GT-DISC-CTR
+                       COMPUTE C-PREM-DISC ROUNDED = C-BASE-RENT * -0.5
+                       ADD 1 TO C-GT-DISC-CTR
                    END-IF
                WHEN 'MS'
                    MOVE 'MARKET STREET' TO D-BLD
@@ -255,23 +279,21 @@
                    MOVE 'HIGH TOWER' TO D-BLD
                WHEN 'R7'
                    MOVE 'UPTOWN CONDOS' TO D-BLD
-                   IF I-UNIT = 23 OR I-UNIT = 25
+                   IF VAL-UNIT-PREM
                        COMPUTE C-PREM-DISC ROUNDED = C-BASE-RENT * 0.12
                        ADD 1 TO C-GT-PREM-CTR
                WHEN 'GM'
                    MOVE 'GANDER MOUNTAIN' TO D-BLD
                WHEN 'BP'
                    MOVE 'BENTON PLACE' TO D-BLD
-                   COMPUTE C-PREM-DISC ROUNDED =
-                   (C-BASE-RENT * 0.33) * -1
+                   COMPUTE C-PREM-DISC ROUNDED = C-BASE-RENT * -0.33
                    ADD 1 TO C-GT-DISC-CTR
                WHEN 'GA'
                    MOVE 'GRAND AVENUE' TO D-BLD
                WHEN 'JK'
                    MOVE 'JACKS PLACE' TO D-BLD
                    IF CURRENT-MONTH = 7 OR CURRENT-MONTH = 12
-                       COMPUTE C-PREM-DISC ROUNDED =
-                       (C-BASE-RENT * 0.5) * -1
+                       COMPUTE C-PREM-DISC ROUNDED = C-BASE-RENT * -0.5
                        ADD 1 TO C-GT-DISC-CTR
                    END-IF
                WHEN 'UN'
@@ -280,7 +302,7 @@
                    MOVE 'YANKEE DOODLE' TO D-BLD
                WHEN 'YT'
                    MOVE 'YAHTZEE AVE' TO D-BLD
-                   IF I-UNIT = 23 OR I-UNIT = 25
+                   IF VAL-UNIT-PREM
                        COMPUTE C-PREM-DISC ROUNDED = C-BASE-RENT * 0.12
                        ADD 1 TO C-GT-PREM-CTR
                 WHEN 'CP'
@@ -291,8 +313,7 @@
                    MOVE 'VERMONT' TO D-BLD
                WHEN 'CT'
                    MOVE 'CHINA TOWN' TO D-BLD
-                   COMPUTE C-PREM-DISC ROUNDED =
-                   (C-BASE-RENT * 0.33) * -1
+                   COMPUTE C-PREM-DISC ROUNDED = C-BASE-RENT * -0.33
                    ADD 1 TO C-GT-DISC-CTR
                WHEN 'YS'
                    MOVE 'YORKSHIRE' TO D-BLD
@@ -313,21 +334,33 @@
            END-IF.
        
        L3-MOVE-PRINT.
-           MOVE I AND C FIELDS               TO D FIELDS.
+		   MOVE I-UNIT                       TO D-UNIT.
+		   MOVE C-BASE-RENT                  TO D-BASE-RENT.
+		   MOVE I-TENANTS                    TO D-TENANTS.
+		   MOVE C-TENANT-CHARGE              TO D-TENANT-CHARGE.
+		   MOVE C-PREM-DISC                  TO D-PREM-DISC.
+		   MOVE C-SUBTOTAL                   TO D-SUBTOTAL.
+		   MOVE I-ELECTRIC                   TO D-ELECTRIC.
+		   MOVE I-GAS                        TO D-GAS.
+		   MOVE I-WATER                      TO D-WATER.
+		   MOVE I-GARBAGE                    TO D-GARBAGE.
+		   MOVE C-TOTAL-UTIL-COST            TO D-TOTAL-UTIL-COST.
+		   MOVE C-RENT-DUE                   TO D-RENT-DUE.
            WRITE PRTLINE FROM DETAIL-LINE
                AFTER ADVANCING 2 LINES
                    AT EOP
                        PERFORM L4-HEADING.
             
        L3-TOTALS.
-           MOVE C-GT FIELDS                  TO GT FIELDS.
+		   MOVE C-GT-DISC-CTR                TO GT-DISC-CTR.
+		   MOVE C-GT-PREM-CTR                TO GT-PREM-CTR.
                WRITE PRTLINE FROM TOTAL-LINE
                    AFTER ADVANCING 3 LINES.
            WRITE PRTLINE FROM TOTAL-LINE2
                    AFTER ADVANCING 2 LINES.
            WRITE PRTLINE FROM TOTAL-LINE3
                    AFTER ADVANCING 1 LINE.
-       
+
        L4-HEADING.
            ADD 1 TO PAGE-CTR.
            MOVE PAGE-CTR                     TO TITLE-PAGE.
