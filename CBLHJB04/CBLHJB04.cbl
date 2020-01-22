@@ -49,11 +49,11 @@
 			   10 CURRENT-DAY      PIC XX.
 			   10 CURRENT-TIME     PIC X(11).
 		   05 CALCS.
-			   10 C-BASE-RENT      PIC 9(5)V99.
+			   10 C-BASE-RENT      PIC 9(5)V99  VALUE 0.
 			   10 C-TENANT-CHARGE  PIC 9(5)V99.
-			   10 C-PREM-DISC      PIC S9(6)V99.
+			   10 C-PREM-DISC      PIC S9(6)V99 VALUE 0.
 			   10 C-TOTAL-UTIL-COST PIC 9(6)V99.
-			   10 C-SUBTOTAL       PIC 9(6)V99.
+			   10 C-SUBTOTAL       PIC 9(6)V99  VALUE 0.
 			   10 C-RENT-DUE       PIC 9(6)V99.
 		   05 TOTALS.
 			   10 C-GT-PREM-CTR    PIC 9(5)   VALUE 0.
@@ -148,11 +148,11 @@
 		   05 D-RENT-DUE           PIC $$,$$$.99.
 		   05 D-RENT-LIMIT-FLAG    PIC XXX    VALUE SPACES.
 
-	   01 TOTAL-LINE.
+       01 TOTAL-LINE.
 
-	   01 TOTAL-LINE2.
-
-	   01 TOTAL-LINE3.
+       01 TOTAL-LINE2.
+       
+       01 TOTAL-LINE3.
 
        PROCEDURE DIVISION.
 	   L1-MAIN.
@@ -352,8 +352,8 @@
                        PERFORM L4-HEADING.
             
        L3-TOTALS.
-		   MOVE C-GT-DISC-CTR                TO GT-DISC-CTR.
-		   MOVE C-GT-PREM-CTR                TO GT-PREM-CTR.
+           MOVE C-GT-DISC-CTR                TO GT-DISC-CTR.
+           MOVE C-GT-PREM-CTR                TO GT-PREM-CTR.
                WRITE PRTLINE FROM TOTAL-LINE
                    AFTER ADVANCING 3 LINES.
            WRITE PRTLINE FROM TOTAL-LINE2
