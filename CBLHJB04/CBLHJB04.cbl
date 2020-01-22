@@ -148,11 +148,11 @@
 		   05 D-RENT-DUE           PIC $$,$$$.99.
 		   05 D-RENT-LIMIT-FLAG    PIC XXX    VALUE SPACES.
 
-       01 TOTAL-LINE.
-
-       01 TOTAL-LINE2.
-       
-       01 TOTAL-LINE3.
+      *01 TOTAL-LINE.
+      *
+      *01 TOTAL-LINE2.
+      *
+      *01 TOTAL-LINE3.
 
        PROCEDURE DIVISION.
 	   L1-MAIN.
@@ -169,6 +169,7 @@
            MOVE CURRENT-MONTH             TO TITLE-MONTH.
            MOVE CURRENT-DAY               TO TITLE-DAY.
            MOVE CURRENT-YEAR              TO TITLE-YEAR.
+		   MOVE 07 TO CURRENT-MONTH.
 	       EVALUATE CURRENT-MONTH
 		       WHEN 01
 			       MOVE 'JANUARY'         TO TITLE-BILL-MONTH
@@ -220,6 +221,7 @@
 	           AFTER ADVANCING 1 LINE.
 			
        L3-CALCS.
+		   MOVE 0                            TO C-PREM-DISC.
            EVALUATE I-UNIT
                WHEN 1 THRU 8
                    COMPUTE C-BASE-RENT ROUNDED = 650
@@ -265,12 +267,14 @@
                WHEN 'PP'
                    MOVE 'PARK PLACE' TO D-BLD
                    IF VAL-UNIT-PREM
-                       COMPUTE C-PREM-DISC ROUNDED = C-BASE-RENT * 0.12
+                       COMPUTE C-PREM-DISC ROUNDED =
+                           (C-BASE-RENT + C-TENANT-CHARGE) * 0.12
                        ADD 1 TO C-GT-PREM-CTR
                WHEN 'IA'
                    MOVE 'IOWA CONDO' TO D-BLD
-                   IF CURRENT-MONTH = 7 OR CURRENT-MONTH = 12
-                       COMPUTE C-PREM-DISC ROUNDED = C-BASE-RENT * -0.5
+                   IF CURRENT-MONTH = 07 OR CURRENT-MONTH = 12
+                       COMPUTE C-PREM-DISC ROUNDED =
+                           (C-BASE-RENT + C-TENANT-CHARGE) * -0.5
                        ADD 1 TO C-GT-DISC-CTR
                    END-IF
                WHEN 'MS'
@@ -280,20 +284,23 @@
                WHEN 'R7'
                    MOVE 'UPTOWN CONDOS' TO D-BLD
                    IF VAL-UNIT-PREM
-                       COMPUTE C-PREM-DISC ROUNDED = C-BASE-RENT * 0.12
+                       COMPUTE C-PREM-DISC ROUNDED =
+                           (C-BASE-RENT + C-TENANT-CHARGE) * 0.12
                        ADD 1 TO C-GT-PREM-CTR
                WHEN 'GM'
                    MOVE 'GANDER MOUNTAIN' TO D-BLD
                WHEN 'BP'
                    MOVE 'BENTON PLACE' TO D-BLD
-                   COMPUTE C-PREM-DISC ROUNDED = C-BASE-RENT * -0.33
+                   COMPUTE C-PREM-DISC ROUNDED =
+                       (C-BASE-RENT + C-TENANT-CHARGE) * -0.33
                    ADD 1 TO C-GT-DISC-CTR
                WHEN 'GA'
                    MOVE 'GRAND AVENUE' TO D-BLD
                WHEN 'JK'
                    MOVE 'JACKS PLACE' TO D-BLD
-                   IF CURRENT-MONTH = 7 OR CURRENT-MONTH = 12
-                       COMPUTE C-PREM-DISC ROUNDED = C-BASE-RENT * -0.5
+                   IF CURRENT-MONTH = 07 OR CURRENT-MONTH = 12
+                       COMPUTE C-PREM-DISC ROUNDED =
+                           (C-BASE-RENT + C-TENANT-CHARGE) * -0.5
                        ADD 1 TO C-GT-DISC-CTR
                    END-IF
                WHEN 'UN'
@@ -303,7 +310,8 @@
                WHEN 'YT'
                    MOVE 'YAHTZEE AVE' TO D-BLD
                    IF VAL-UNIT-PREM
-                       COMPUTE C-PREM-DISC ROUNDED = C-BASE-RENT * 0.12
+                       COMPUTE C-PREM-DISC ROUNDED =
+                           (C-BASE-RENT + C-TENANT-CHARGE) * 0.12
                        ADD 1 TO C-GT-PREM-CTR
                 WHEN 'CP'
                    MOVE 'COURT PLACE' TO D-BLD
@@ -313,7 +321,8 @@
                    MOVE 'VERMONT' TO D-BLD
                WHEN 'CT'
                    MOVE 'CHINA TOWN' TO D-BLD
-                   COMPUTE C-PREM-DISC ROUNDED = C-BASE-RENT * -0.33
+                   COMPUTE C-PREM-DISC ROUNDED =
+                       (C-BASE-RENT + C-TENANT-CHARGE) * -0.33
                    ADD 1 TO C-GT-DISC-CTR
                WHEN 'YS'
                    MOVE 'YORKSHIRE' TO D-BLD
@@ -352,14 +361,14 @@
                        PERFORM L4-HEADING.
             
        L3-TOTALS.
-           MOVE C-GT-DISC-CTR                TO GT-DISC-CTR.
-           MOVE C-GT-PREM-CTR                TO GT-PREM-CTR.
-               WRITE PRTLINE FROM TOTAL-LINE
-                   AFTER ADVANCING 3 LINES.
-           WRITE PRTLINE FROM TOTAL-LINE2
-                   AFTER ADVANCING 2 LINES.
-           WRITE PRTLINE FROM TOTAL-LINE3
-                   AFTER ADVANCING 1 LINE.
+      *    MOVE C-GT-DISC-CTR                TO GT-DISC-CTR.
+      *    MOVE C-GT-PREM-CTR                TO GT-PREM-CTR.
+      *        WRITE PRTLINE FROM TOTAL-LINE
+      *            AFTER ADVANCING 3 LINES.
+      *    WRITE PRTLINE FROM TOTAL-LINE2
+      *            AFTER ADVANCING 2 LINES.
+      *    WRITE PRTLINE FROM TOTAL-LINE3
+      *            AFTER ADVANCING 1 LINE.
 
        L4-HEADING.
            ADD 1 TO PAGE-CTR.
