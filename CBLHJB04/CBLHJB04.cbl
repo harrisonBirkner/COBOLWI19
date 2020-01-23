@@ -49,15 +49,21 @@
 			   10 CURRENT-DAY      PIC XX.
 			   10 CURRENT-TIME     PIC X(11).
 		   05 CALCS.
-			   10 C-BASE-RENT      PIC 9(5)V99  VALUE 0.
+			   10 C-BASE-RENT      PIC 9(5)V99      VALUE 0.
 			   10 C-TENANT-CHARGE  PIC 9(5)V99.
-			   10 C-PREM-DISC      PIC S9(6)V99 VALUE 0.
-			   10 C-TOTAL-UTIL-COST PIC 9(6)V99.
-			   10 C-SUBTOTAL       PIC 9(6)V99  VALUE 0.
+			   10 C-PREM-DISC      PIC S9(6)V99     VALUE 0.
+			   10 C-TOTAL-UTIL-COST     PIC 9(6)V99.
+			   10 C-SUBTOTAL       PIC 9(6)V99      VALUE 0.
 			   10 C-RENT-DUE       PIC 9(6)V99.
 		   05 TOTALS.
 			   10 C-GT-PREM-CTR    PIC 9(5)   VALUE 0.
 			   10 C-GT-DISC-CTR    PIC 9(5)   VALUE 0.
+			   10 C-GT-BASE-RENT   PIC 9(7)V99      VALUE 0.
+			   10 C-GT-TENANT-CHARGE    PIC 9(7)V99 VALUE 0.
+			   10 C-GT-PREM-DISC   PIC S9(8)V99 VALUE 0.
+			   10 C-GT-SUBTOTAL    PIC 9(8)V99  VALUE 0.
+			   10 C-GT-TOT-UTIL-COST    PIC 9(8)V99 VALUE 0.
+			   10 C-GT-RENT-DUE     PIC 9(8)V99 VALUE 0.
 
 	   01 TITLE-LINE1.
 		   05 FILLER               PIC X(6)   VALUE 'DATE: '.
@@ -148,11 +154,31 @@
 		   05 D-RENT-DUE           PIC $$,$$$.99.
 		   05 D-RENT-LIMIT-FLAG    PIC XXX    VALUE SPACES.
 
-      *01 TOTAL-LINE.
-      *
-      *01 TOTAL-LINE2.
-      *
-      *01 TOTAL-LINE3.
+       01 TOTAL-LINE.
+           05 FILLER               PIC X(13)  VALUE 'GRAND TOTALS:'.
+		   05 FILLER               PIC X(5)   VALUE SPACES.
+		   05 GT-BASE-RENT         PIC $$$,$$$.99.
+		   05 FILLER               PIC X(5)   VALUE SPACES.
+		   05 GT-TENANT-CHARGE     PIC $$$,$$$.99.
+		   05 FILLER               PIC XX     VALUE SPACES.
+		   05 GT-PREM-DISC         PIC $$$$,$$$.99+.
+		   05 FILLER               PIC X      VALUE SPACES.
+		   05 GT-SUBTOTAL          PIC $$$$,$$$.99.
+		   05 FILLER               PIC X(36)  VALUE SPACES.
+		   05 GT-TOT-UTIL-COST     PIC $$$$,$$$.99.
+		   05 FILLER               PIC XX     VALUE SPACES.
+		   05 GT-RENT-DUE          PIC $$$$,$$$.99.
+
+       01 TOTAL-LINE2.
+           05 FILLER               PIC X(34)  VALUE SPACES.
+		   05 FILLER               PIC X(19)
+              VALUE 'RENTALS DISCOUNTED '.
+		   05 GT-DISC-CTR          PIC ZZ9.
+
+       01 TOTAL-LINE3.
+		   05 FILLER               PIC X(37)  VALUE SPACES.
+		   05 FILLER               PIC X(16)  VALUE 'PREMIUM RENTALS '.
+		   05 GT-PREM-CTR          PIC ZZ9.
 
        PROCEDURE DIVISION.
 	   L1-MAIN.
@@ -165,36 +191,35 @@
        L2-INIT.
            OPEN INPUT BILL-INPUT.
            OPEN OUTPUT PRTOUT.
-           MOVE FUNCTION CURRENT-DATE     TO CURRENT-DATE-AND-TIME.
-           MOVE CURRENT-MONTH             TO TITLE-MONTH.
-           MOVE CURRENT-DAY               TO TITLE-DAY.
-           MOVE CURRENT-YEAR              TO TITLE-YEAR.
-		   MOVE 07 TO CURRENT-MONTH.
-	       EVALUATE CURRENT-MONTH
-		       WHEN 01
-			       MOVE 'JANUARY'         TO TITLE-BILL-MONTH
-		       WHEN 02
-			       MOVE 'FEBRUARY'        TO TITLE-BILL-MONTH
-		       WHEN 03
-			       MOVE 'MARCH'           TO TITLE-BILL-MONTH
-		       WHEN 04
-			       MOVE 'APRIL'           TO TITLE-BILL-MONTH
-		       WHEN 05
-			       MOVE 'MAY'             TO TITLE-BILL-MONTH
-		       WHEN 06
-			       MOVE 'JUNE'            TO TITLE-BILL-MONTH
-		       WHEN 07
-			       MOVE 'JULY'            TO TITLE-BILL-MONTH
+           MOVE FUNCTION CURRENT-DATE        TO CURRENT-DATE-AND-TIME.
+           MOVE CURRENT-MONTH                TO TITLE-MONTH.
+           MOVE CURRENT-DAY                  TO TITLE-DAY.
+           MOVE CURRENT-YEAR                 TO TITLE-YEAR.
+	       EVALUATE CURRENT-MONTH		     
+		       WHEN 01					     
+			       MOVE 'JANUARY'            TO TITLE-BILL-MONTH
+		       WHEN 02					     
+			       MOVE 'FEBRUARY'           TO TITLE-BILL-MONTH
+		       WHEN 03					     
+			       MOVE 'MARCH'              TO TITLE-BILL-MONTH
+		       WHEN 04					     
+			       MOVE 'APRIL'              TO TITLE-BILL-MONTH
+		       WHEN 05					     
+			       MOVE 'MAY'                TO TITLE-BILL-MONTH
+		       WHEN 06					     
+			       MOVE 'JUNE'               TO TITLE-BILL-MONTH
+		       WHEN 07					     
+			       MOVE 'JULY'               TO TITLE-BILL-MONTH
 		       WHEN 08
-			       MOVE 'AUGUST'          TO TITLE-BILL-MONTH
+			       MOVE 'AUGUST'             TO TITLE-BILL-MONTH
 		       WHEN 09
-			       MOVE 'SEPTEMBER'       TO TITLE-BILL-MONTH
+			       MOVE 'SEPTEMBER'          TO TITLE-BILL-MONTH
 		       WHEN 10
-			       MOVE 'OCTOBER'         TO TITLE-BILL-MONTH
+			       MOVE 'OCTOBER'            TO TITLE-BILL-MONTH
 		       WHEN 11
-			       MOVE 'NOVEMBER'        TO TITLE-BILL-MONTH
+			       MOVE 'NOVEMBER'           TO TITLE-BILL-MONTH
 		       WHEN 12
-			       MOVE 'DECEMBER'        TO TITLE-BILL-MONTH
+			       MOVE 'DECEMBER'           TO TITLE-BILL-MONTH
 		   END-EVALUATE.
 	       PERFORM L3-INIT-HEADING.
            PERFORM L9-READ-INPUT.
@@ -211,7 +236,7 @@
 
        L3-INIT-HEADING.
            ADD 1 TO PAGE-CTR.
-           MOVE PAGE-CTR                  TO TITLE-PAGE.
+           MOVE PAGE-CTR                     TO TITLE-PAGE.
            WRITE PRTLINE FROM TITLE-LINE1.
 	       WRITE PRTLINE FROM TITLE-LINE2
 		       AFTER ADVANCING 1 LINE.
@@ -261,73 +286,73 @@
        
            EVALUATE I-BLD-CODE
                WHEN 'AA'
-                   MOVE 'PALACE PLACE' TO D-BLD
+                   MOVE 'PALACE PLACE'       TO D-BLD
                WHEN 'GG'
-                   MOVE 'GEORIGA' TO D-BLD
+                   MOVE 'GEORIGA'            TO D-BLD
                WHEN 'PP'
-                   MOVE 'PARK PLACE' TO D-BLD
+                   MOVE 'PARK PLACE'         TO D-BLD
                    IF VAL-UNIT-PREM
                        COMPUTE C-PREM-DISC ROUNDED =
                            (C-BASE-RENT + C-TENANT-CHARGE) * 0.12
                        ADD 1 TO C-GT-PREM-CTR
                WHEN 'IA'
-                   MOVE 'IOWA CONDO' TO D-BLD
+                   MOVE 'IOWA CONDO'         TO D-BLD
                    IF CURRENT-MONTH = 07 OR CURRENT-MONTH = 12
                        COMPUTE C-PREM-DISC ROUNDED =
                            (C-BASE-RENT + C-TENANT-CHARGE) * -0.5
                        ADD 1 TO C-GT-DISC-CTR
                    END-IF
                WHEN 'MS'
-                   MOVE 'MARKET STREET' TO D-BLD
+                   MOVE 'MARKET STREET'      TO D-BLD
                WHEN 'HH'
-                   MOVE 'HIGH TOWER' TO D-BLD
+                   MOVE 'HIGH TOWER'         TO D-BLD
                WHEN 'R7'
-                   MOVE 'UPTOWN CONDOS' TO D-BLD
+                   MOVE 'UPTOWN CONDOS'      TO D-BLD
                    IF VAL-UNIT-PREM
                        COMPUTE C-PREM-DISC ROUNDED =
                            (C-BASE-RENT + C-TENANT-CHARGE) * 0.12
                        ADD 1 TO C-GT-PREM-CTR
                WHEN 'GM'
-                   MOVE 'GANDER MOUNTAIN' TO D-BLD
+                   MOVE 'GANDER MOUNTAIN'    TO D-BLD
                WHEN 'BP'
-                   MOVE 'BENTON PLACE' TO D-BLD
+                   MOVE 'BENTON PLACE'       TO D-BLD
                    COMPUTE C-PREM-DISC ROUNDED =
                        (C-BASE-RENT + C-TENANT-CHARGE) * -0.33
                    ADD 1 TO C-GT-DISC-CTR
                WHEN 'GA'
-                   MOVE 'GRAND AVENUE' TO D-BLD
+                   MOVE 'GRAND AVENUE'       TO D-BLD
                WHEN 'JK'
-                   MOVE 'JACKS PLACE' TO D-BLD
+                   MOVE 'JACKS PLACE'        TO D-BLD
                    IF CURRENT-MONTH = 07 OR CURRENT-MONTH = 12
                        COMPUTE C-PREM-DISC ROUNDED =
                            (C-BASE-RENT + C-TENANT-CHARGE) * -0.5
                        ADD 1 TO C-GT-DISC-CTR
                    END-IF
                WHEN 'UN'
-                   MOVE 'UNDERGROUND SAM' TO D-BLD
+                   MOVE 'UNDERGROUND SAM'    TO D-BLD
                WHEN 'YD'
-                   MOVE 'YANKEE DOODLE' TO D-BLD
+                   MOVE 'YANKEE DOODLE'      TO D-BLD
                WHEN 'YT'
-                   MOVE 'YAHTZEE AVE' TO D-BLD
+                   MOVE 'YAHTZEE AVE'        TO D-BLD
                    IF VAL-UNIT-PREM
                        COMPUTE C-PREM-DISC ROUNDED =
                            (C-BASE-RENT + C-TENANT-CHARGE) * 0.12
                        ADD 1 TO C-GT-PREM-CTR
                 WHEN 'CP'
-                   MOVE 'COURT PLACE' TO D-BLD
+                   MOVE 'COURT PLACE'        TO D-BLD
                WHEN 'NZ'
-                   MOVE 'NEW ZOO' TO D-BLD
+                   MOVE 'NEW ZOO'            TO D-BLD
                WHEN 'VV'
-                   MOVE 'VERMONT' TO D-BLD
+                   MOVE 'VERMONT'            TO D-BLD
                WHEN 'CT'
-                   MOVE 'CHINA TOWN' TO D-BLD
+                   MOVE 'CHINA TOWN'         TO D-BLD
                    COMPUTE C-PREM-DISC ROUNDED =
                        (C-BASE-RENT + C-TENANT-CHARGE) * -0.33
                    ADD 1 TO C-GT-DISC-CTR
                WHEN 'YS'
-                   MOVE 'YORKSHIRE' TO D-BLD
+                   MOVE 'YORKSHIRE'          TO D-BLD
                WHEN 'ME'
-                   MOVE 'MAINE APT' TO D-BLD
+                   MOVE 'MAINE APT'          TO D-BLD
            END-EVALUATE.
        
            COMPUTE C-SUBTOTAL ROUNDED =
@@ -341,6 +366,13 @@
 		   ELSE
 			   MOVE SPACES                   TO D-RENT-LIMIT-FLAG
            END-IF.
+
+		   ADD C-BASE-RENT TO C-GT-BASE-RENT.
+		   ADD C-TENANT-CHARGE TO C-GT-TENANT-CHARGE.
+		   ADD C-PREM-DISC TO C-GT-PREM-DISC.
+		   ADD C-SUBTOTAL TO C-GT-SUBTOTAL.
+		   ADD C-TOTAL-UTIL-COST TO C-GT-TOT-UTIL-COST.
+		   ADD C-RENT-DUE TO C-GT-RENT-DUE.
        
        L3-MOVE-PRINT.
 		   MOVE I-UNIT                       TO D-UNIT.
@@ -355,20 +387,28 @@
 		   MOVE I-GARBAGE                    TO D-GARBAGE.
 		   MOVE C-TOTAL-UTIL-COST            TO D-TOTAL-UTIL-COST.
 		   MOVE C-RENT-DUE                   TO D-RENT-DUE.
+
            WRITE PRTLINE FROM DETAIL-LINE
                AFTER ADVANCING 2 LINES
                    AT EOP
                        PERFORM L4-HEADING.
             
        L3-TOTALS.
-      *    MOVE C-GT-DISC-CTR                TO GT-DISC-CTR.
-      *    MOVE C-GT-PREM-CTR                TO GT-PREM-CTR.
-      *        WRITE PRTLINE FROM TOTAL-LINE
-      *            AFTER ADVANCING 3 LINES.
-      *    WRITE PRTLINE FROM TOTAL-LINE2
-      *            AFTER ADVANCING 2 LINES.
-      *    WRITE PRTLINE FROM TOTAL-LINE3
-      *            AFTER ADVANCING 1 LINE.
+           MOVE C-GT-DISC-CTR                TO GT-DISC-CTR.
+           MOVE C-GT-PREM-CTR                TO GT-PREM-CTR.
+		   MOVE C-GT-BASE-RENT               TO GT-BASE-RENT.
+		   MOVE C-GT-TENANT-CHARGE           TO GT-TENANT-CHARGE.
+		   MOVE C-GT-PREM-DISC               TO GT-PREM-DISC.
+		   MOVE C-GT-SUBTOTAL                TO GT-SUBTOTAL.
+		   MOVE C-GT-TOT-UTIL-COST           TO GT-TOT-UTIL-COST.
+		   MOVE C-GT-RENT-DUE                TO GT-RENT-DUE.
+
+           WRITE PRTLINE FROM TOTAL-LINE
+                   AFTER ADVANCING 3 LINES.
+           WRITE PRTLINE FROM TOTAL-LINE2
+                   AFTER ADVANCING 2 LINES.
+           WRITE PRTLINE FROM TOTAL-LINE3
+                   AFTER ADVANCING 1 LINE.
 
        L4-HEADING.
            ADD 1 TO PAGE-CTR.
@@ -385,6 +425,6 @@
        L9-READ-INPUT.
            READ BILL-INPUT
                AT END
-                   MOVE 'NO' TO MORE-RECS.
+                   MOVE 'NO'                 TO MORE-RECS.
 
        END PROGRAM CBLHJB04.
