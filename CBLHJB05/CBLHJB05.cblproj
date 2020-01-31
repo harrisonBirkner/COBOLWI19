@@ -24,5 +24,8 @@
     <MaxError>100</MaxError>
     <Optimize>True</Optimize>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="CBLHJB05.cbl" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Micro Focus\Visual COBOL\v1.0\MicroFocus.COBOL.targets" />
 </Project>
