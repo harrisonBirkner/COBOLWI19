@@ -1,0 +1,31 @@
+
+DATE: 02/04/2020                                    ALBIA SOCCER CLUB FUNDRAISER                                            PAGE:  1
+COBHJB05                                                 HARRISON DIVISION                                                          
+                                                            ERROR REPORT                                                            
+
+ERROR RECORD                                                            ERROR DESCRIPTION                                           
+
+               ROY            54321  DAVIS STFLORIS    IA5253743210401A LAST NAME REQUIRED                                          
+
+FROAH                         24681  SHORT STLANCASTER MO6354824680205D FIRST NAME REQUIRED                                         
+
+SMELL          LEE                           PEORIA    IL6161501010610C ADDRESS REQUIRED                                            
+
+LESTER         MO             42069  CREEP ST          WI1234599990301E CITY REQUIRED                                               
+
+CHOCULA        COUNT          5201  SUCKER STSPOOKVILLEPN1500136910503B STATES MUST BE IA, IL, MI, MO, NE, OR WI                    
+
+HANCOCK        JOHN           68505  BIG BLVDLINCOLN   NEAEIOUANDY0304D ZIP CODE MUST BE NUMERIC                                    
+
+DOO            SCOOBY         85     SPOOK RDCOOLSVILE MO867530909XX01E POP TYPE MUST BE NUMERIC                                    
+
+DOO            SCOOBY         85     SPOOK RDCOOLSVILE MO8675309090701E POP TYPE MUST BE 1-6                                        
+
+BIRKNER        JUSTIN         12345 BIGBRO RDMEDIAPOLISIA52637123401XXB NUMBER OF CASES MUST BE NUMERIC                             
+
+BIRKNER        JUSTIN         12345 BIGBRO RDMEDIAPOLISIA5263712340100B MINIMUM OF 1 CASE                                           
+
+BIRKNER        HARRISON       123   COUNTY RDBLOOMFIELDIA5253712340102F TEAM MUST BE A, B, C, D, OR E                               
+
+
+TOTAL ERRORS    11                                                                                                                  
