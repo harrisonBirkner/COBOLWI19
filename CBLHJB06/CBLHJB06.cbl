@@ -65,18 +65,6 @@
 			   10 CURRENT-MONTH       PIC XX.	  
 			   10 CURRENT-DAY         PIC XX.	  
 			   10 CURRENT-TIME        PIC X(11).
-		   05 ERRORS.
-			   10 FILLER              PIC X(60)
-                  VALUE 'LAST NAME REQUIRED'.
-			   10 FILLER              PIC X(60)
-                  VALUE 'FIRST NAME REQUIRED'.
-			   10 FILLER              PIC X(60)
-                  VALUE 'ADDRESS REQUIRED'.
-			   10 FILLER              PIC X(60) VALUE 'CITY REQUIRED'.
-			   10 FILLER              PIC X(60)
-                  VALUE 'VALID STATES ARE IA, IL, MI, MO, NE, OR WI'.
-			   10 FILLER              PIC X(60)
-                  VALUE 'ZIP CODE MUST BE NUMERIC'.
 		   05 CALCS.
 			   10 C-DEP               PIC 9V99.
 			   10 C-TOT-DEP           PIC 9(5)V99.
@@ -96,7 +84,72 @@
 				   15 C-GT-C-TEAM        PIC 9(11)V99  VALUE 0.
 				   15 C-GT-D-TEAM        PIC 9(11)V99  VALUE 0.
 				   15 C-GT-E-TEAM        PIC 9(11)V99  VALUE 0.
+
+	   01 ERRORS.
+		   05 FILLER                  PIC X(60)
+               VALUE 'LAST NAME REQUIRED'.
+		   05 FILLER                  PIC X(60)
+               VALUE 'FIRST NAME REQUIRED'.
+		   05 FILLER                  PIC X(60)
+               VALUE 'ADDRESS REQUIRED'.
+		   05 FILLER                  PIC X(60) VALUE 'CITY REQUIRED'.
+	       05 FILLER                  PIC X(60)
+               VALUE 'VALID STATES ARE IA, IL, MI, MO, NE, OR WI'.
+		   05 FILLER                  PIC X(60)
+               VALUE 'ZIP CODE MUST BE NUMERIC'.
+	       05 FILLER                  PIC X(60)
+			   VALUE 'POP TYPE MUST BE NUMERIC'.
+		   05 FILLER                  PIC X(60)
+			   VALUE 'POP TYPE MUST BE 1-6'.
+		   05 FILLER                  PIC X(60)
+               VALUE 'NUMBER OF CASES MUST BE NUMERIC'.
+		   05 FILLER                  PIC X(60)
+		       VALUE 'MINIMUM OF ONE CASE'.
+
+	   01 ERROR-TABLE REDEFINES ERRORS.
+	       05 ERRORS		          PIC 9(6)	  OCCURS 10 TIMES.
+
+	   01 TEAMS.
+           05 FILLER		          PIC X(12)	  VALUE 'A0000000000'.
+	       05 FILLER		          PIC X(12)	  VALUE 'B0000000000'.
+	       05 FILLER		          PIC X(12)	  VALUE 'C0000000000'.
+	       05 FILLER		          PIC X(12)	  VALUE 'D0000000000'.
+	       05 FILLER		          PIC X(12)	  VALUE 'E0000000000'.
+	
+       01 C-TEAM-TABLE REDEFINES TEAMS.
+           05 C-TEAM-INFO                         OCCURS 5 TIMES.
+	           10 TEAM-CODE	          PIC X.
+		       10 TEAM-TOTAL	      PIC 9(9)V99.
+
+	   01 C-POP-TOTAL-TABLE.
+		   05 C-POP-TOTAL             PIC 9(6)    OCCURS 6 TIMES.
 												  
+       01 POP-LITERALS.
+	       05 FILLER			      PIC X(16)	  VALUE 'COKE'.
+	       05 FILLER			      PIC X(16)	  VALUE 'DIET COKE'.
+	       05 FILLER			      PIC X(16)   VALUE 'MELLO YELLO'.
+	       05 FILLER			      PIC X(16)   VALUE 'CHERRY COKE'.
+	       05 FILLER			      PIC X(16)
+              VALUE 'DIET CHERRY COKE'.
+	       05 FILLER			      PIC X(16)	  VALUE 'SPRITE'.
+	
+       01 POP-LIT-TABLE REDEFINES POP-LITERALS.
+	      05 POP-LIT			      PIC X(16)	  OCCURS 6 TIMES.
+
+	   01 POP-DEP-RATES.
+		   05 FILLER                  PIC X(5)    VALUE 'IA005'.
+		   05 FILLER                  PIC X(5)    VALUE 'IL000'.
+		   05 FILLER                  PIC X(5)    VALUE 'MI010'.
+		   05 FILLER                  PIC X(5)    VALUE 'MO000'.
+		   05 FILLER                  PIC X(5)    VALUE 'NE005'.
+		   05 FILLER                  PIC X(5)    VALUE 'WI005'.
+
+	   01 POP-DEP-RATES-TABLE REDEFINES POP-DEP-RATES.
+		   05 DEP-INFO                            OCCURS 6 TIMES.
+			   10 DEP-STATE           PIC XX.
+			   10 DEP-AMNT            PIC 9V99.
+	       
+
 	   01 TITLE-LINE1.							  
            05 FILLER                  PIC X(6)    VALUE 'DATE: '.
 		   05 TITLE-DATE.						  
@@ -197,25 +250,26 @@
        01 GT-POP-LINE.
 		   05 FILLER                  PIC X(13)   VALUE 'GRAND TOTALS:'.
 
-	   01 GT-POP-LINE2.
-		   05 FILLER                  PIC XXX.
-		   05 GT-POP-NAME1            PIC X(16).
-		   05 FILLER                  PIC X       VALUE SPACES.
-		   05 GT-POP-TOTAL1           PIC ZZZ,ZZ9.
-		   05 FILLER                  PIC X(6)    VALUE SPACES.
-		   05 GT-POP-NAME2            PIC X(16).
-		   05 FILLER                  PIC X       VALUE SPACES.
-		   05 GT-POP-TOTAL2           PIC ZZZ,ZZ9.
-		   05 FILLER                  PIC X(6)    VALUE SPACES.
-		   05 GT-POP-NAME3            PIC X(16).
-		   05 FILLER                  PIC X       VALUE SPACES.
-		   05 GT-POP-TOTAL3           PIC ZZZ,ZZ9.
+	   01 GT-POP-LINE2.   
+	       05 FILLER	              PIC XXX	  VALUE SPACES.
+	       05 GT-POP-TOTAL-TABLE.
+               10 GT-POP-TOTAL                    OCCURS 3 TIMES.
+		           15 GT-POP-LITERAL  PIC X(16).
+		           15 FILLER		  PIC X		  VALUE SPACES.
+		           15 GT-POP-TOTAL	  PIC ZZZ,ZZ9.
+		           15 FILLER		  PIC X(6)	  VALUE SPACES.
 
 	   01 GT-TEAM-LINE.
 		   05 FILLER                  PIC X(12)   VALUE 'TEAM TOTALS:'.
 
        01 GT-TEAM-LINE2.
 		   05 FILLER                  PIC XXX     VALUE SPACES.
+		   05 GT-TEAM-TOTAL-TABLE.
+			   10 GT-TEAM-TOTAL                   OCCURS 1 TIMES.
+				   15 GT-TEAM-NAME    PIC X.
+				   15 FILLER          PIC X.
+				   15 GT-TEAM-TOTAL   PIC $$$$,$$$,$$$.99.
+
 		   05 GT-TEAM-NAME            PIC X.
 		   05 GT-TEAM-TOTAL           PIC $$$$,$$$,$$$.99.
 
@@ -245,6 +299,9 @@
      
            PERFORM L3-INIT-HEADING.
            PERFORM L9-READ-INPUT.
+
+		   INITIALIZE GT-POP-TOTAL-TABLE.
+		   INITIALIZE C-POP-TOTAL-TABLE.
 
        L2-MAINLINE.
 	       PERFORM L3-VALIDATION
